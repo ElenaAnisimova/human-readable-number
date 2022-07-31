@@ -1,4 +1,4 @@
-function toReadable(number) {
+module.exports = function toReadable(number) {
     let result;
     const zero = ('zero');
     const one = ('one');
@@ -19,7 +19,7 @@ function toReadable(number) {
     const sixteen = ('sixteen');
     const seventeen = ('seventeen');
     const eighteen = ('eighteen');
-    const ninteen = ('ninteen');
+    const nineteen = ('nineteen');
     const twenty = ('twenty');
     const thirty = ('thirty');
     const forty = ('forty');
@@ -28,7 +28,7 @@ function toReadable(number) {
     const seventy = ('seventy');
     const eighty = ('eighty');
     const ninety = ('ninety');
-    const hundred = ('hundred');
+    
 
     switch (number) {
         case 0: result = zero; break;
@@ -50,7 +50,7 @@ function toReadable(number) {
         case 16: result = sixteen; break;
         case 17: result = seventeen; break;
         case 18: result = eighteen; break;
-        case 19: result = ninteen; break;
+        case 19: result = nineteen; break;
     }
 
 
@@ -88,92 +88,154 @@ function toReadable(number) {
     };
 
 
-    if (number > 100 && number < 1000) {
+    if (number >= 100 && number < 1000 && (number % 100) < 20) {
         let Hundreds = (Math.floor(number / 100));
-        let resultForHundreds;
+        let resultForHundredsForTeens;
         switch (Hundreds) {
-            case 1: resultForHundreds = one; break;
-            case 2: resultForHundreds = two; break;
-            case 3: resultForHundreds = three; break;
-            case 4: resultForHundreds = four; break;
-            case 5: resultForHundreds = five; break;
-            case 6: resultForHundreds = six; break;
-            case 7: resultForHundreds = seven; break;
-            case 8: resultForHundreds = eight; break;
-            case 9: resultForHundreds = nine; break;
+            case 1: resultForHundredsForTeens = one; break;
+            case 2: resultForHundredsForTeens = two; break;
+            case 3: resultForHundredsForTeens = three; break;
+            case 4: resultForHundredsForTeens = four; break;
+            case 5: resultForHundredsForTeens = five; break;
+            case 6: resultForHundredsForTeens = six; break;
+            case 7: resultForHundredsForTeens = seven; break;
+            case 8: resultForHundredsForTeens = eight; break;
+            case 9: resultForHundredsForTeens = nine; break;
         };
 
-        let DozensOfHundreds = (Math.floor(number % 100));
-        let resultForDozensOfHundreds;
+        
         let resultForTeens;
-        let teenRound = Math.floor(number % 100);
-        if (teenRound < 20 && DozensOfHundreds === 1) {
+        let teenRound = number % 100;
+         if (teenRound  === 0) {
+            resultForTeens = ''
+        }             
+        else if (teenRound  === 1) {
             resultForTeens = one
         }
-        else if (teenRound < 20 && DozensOfHundreds === 2) {
+        else if (teenRound  === 2) {
             resultForTeens = two
         }
-        else if (teenRound < 20 && DozensOfHundreds === 3) {
+        else if (teenRound  === 3) {
             resultForTeens = three
         }
-        else if (teenRound < 20 && DozensOfHundreds === 4) {
+        else if (teenRound === 4) {
             resultForTeens = four
         }
-        else if (teenRound < 20 && DozensOfHundreds === 5) {
+        else if (teenRound === 5) {
             resultForTeens = five
         }
-        else if (teenRound < 20 && DozensOfHundreds === 6) {
+        else if (teenRound  === 6) {
             resultForTeens = six
         }
-        else if (teenRound < 20 && DozensOfHundreds === 7) {
+        else if (teenRound  === 7) {
             resultForTeens = seven
         }
-        else if (teenRound < 20 && DozensOfHundreds === 8) {
+        else if (teenRound  === 8) {
             resultForTeens = eight
         }
-        else if (teenRound < 20 && DozensOfHundreds === 9) {
+        else if (teenRound === 9) {
             resultForTeens = nine
         }
-        else if (teenRound < 20 && DozensOfHundreds === 10) {
+        else if (teenRound === 10) {
             resultForTeens = ten
         }
-        else if (teenRound < 20 && DozensOfHundreds === 11) {
+        else if (teenRound === 11) {
             resultForTeens = eleven
         }
-        else if (teenRound < 20 && DozensOfHundreds === 12) {
+        else if (teenRound === 12) {
             resultForTeens = twelve
         }
-        else if (teenRound < 20 && DozensOfHundreds === 13) {
+        else if (teenRound === 13) {
             resultForTeens = thirteen
         }
-        else if (teenRound < 20 && DozensOfHundreds === 14) {
+        else if (teenRound === 14) {
             resultForTeens = fourteen
         }
-        else if (teenRound < 20 && DozensOfHundreds === 15) {
+        else if (teenRound === 15) {
             resultForTeens = fifteen
         }
-        else if (teenRound < 20 && DozensOfHundreds === 16) {
+        else if (teenRound === 16) {
             resultForTeens = sixteen
         }
-        else if (teenRound < 20 && DozensOfHundreds === 17) {
+        else if (teenRound === 17) {
             resultForTeens = seventeen
         }
-        else if (teenRound < 20 && DozensOfHundreds === 18) {
+        else if (teenRound === 18) {
             resultForTeens = eighteen
         }
-        else if (teenRound < 20 && DozensOfHundreds === 19) {
-            resultForTeens = ninteen
+        else if (teenRound === 19) {
+            resultForTeens = nineteen
         }
-
-        else if (teenRound > 20 ) 
-            result = `${resultForHundreds} hundred ${resultForDozensOfHundreds}`;
+        result = `${resultForHundredsForTeens} hundred ${resultForTeens}`;
     };
 
 
+if (number > 100 && number < 1000 && (number % 100) >= 20) {
+    let DozensOfHundreds = (Math.floor((number % 100) / 10));
+    let Hundreds = (Math.floor(number / 100));
+    let resultForHundreds;
+    switch (Hundreds) {
+        case 1: resultForHundreds = one; break;
+        case 2: resultForHundreds = two; break;
+        case 3: resultForHundreds = three; break;
+        case 4: resultForHundreds = four; break;
+        case 5: resultForHundreds = five; break;
+        case 6: resultForHundreds = six; break;
+        case 7: resultForHundreds = seven; break;
+        case 8: resultForHundreds = eight; break;
+        case 9: resultForHundreds = nine; break;
+    };
 
-    return console.log(Math.floor(number % 100));
+        let resultForDozensOfHundreds;
+        if ( DozensOfHundreds === 2) {
+            resultForDozensOfHundreds = twenty
+        }
+        else if (DozensOfHundreds === 3) {
+            resultForDozensOfHundreds = thirty
+        }
+        else if ( DozensOfHundreds === 4) {
+            resultForDozensOfHundreds = forty
+        }
+        else if (DozensOfHundreds === 5) {
+            resultForDozensOfHundreds = fifty
+        }
+        else if ( DozensOfHundreds === 6) {
+            resultForDozensOfHundreds = sixty
+        }
+        else if (DozensOfHundreds === 7) {
+            resultForDozensOfHundreds = seventy
+        }
+        else if ( DozensOfHundreds === 8) {
+            resultForDozensOfHundreds = eighty
+        }
+        else if (DozensOfHundreds === 9) {
+            resultForDozensOfHundreds = ninety
+        }
+
+        let Units = number % 10;
+        let resultForUForH;
+        switch (Units) {
+            case 0: resultForUForH = ''; break;
+            case 1: resultForUForH = one; break;
+            case 2: resultForUForH = two; break;
+            case 3: resultForUForH = three; break;
+            case 4: resultForUForH = four; break;
+            case 5: resultForUForH = five; break;
+            case 6: resultForUForH = six; break;
+            case 7: resultForUForH = seven; break;
+            case 8: resultForUForH = eight; break;
+            case 9: resultForUForH = nine; break;
+        }
+       
+            result = `${resultForHundreds} hundred ${resultForDozensOfHundreds} ${resultForUForH}`;
+    }; 
+
+
+
+
+    return result.trim();
 };
 
-toReadable(920);
+
 
 
